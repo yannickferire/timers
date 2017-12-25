@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title center>
+    <ion-title center text-uppercase>
       Timers
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  
+  <p><strong>{{countDown | async | formatTime}}</strong></p>
 </ion-content>
