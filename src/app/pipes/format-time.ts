@@ -5,26 +5,25 @@ import { Pipe } from '@angular/core';
 })
 export class FormatTime {
     times = {
-        h: 3600,
+        hour: 3600,
         min: 60,
         sec: 1
     }
 
-    transform(seconds){
+    transform(sec) {
         let time_string: string = '';
-        let plural: string = '';
-        for(var key in this.times){
-            if(Math.floor(seconds / this.times[key]) > 0){
-                if(Math.floor(seconds / this.times[key]) >1 ){
-                    plural = 's';
-                }
-                else{
-                    plural = '';
-                }
+        let value;
+        let parent = false;
+        for (var key in this.times) {
+            value = Math.floor(sec / this.times[key]);
+            if ((parent == false && value > 0) || (parent == true && value >= 0)) {
+                if (value < 10) { value = '0'+value; }
+                time_string += '<span class="'+ key.toString() +'--countdown-timer"><strong>';
+                time_string += value.toString() + '</strong> ';
+                time_string += key.toString() + '</span>';
+                sec = sec - this.times[key] * Math.floor(sec / this.times[key]);
 
-                time_string += Math.floor(seconds / this.times[key]).toString() + ' ' + key.toString() + plural + ' ';
-                seconds = seconds - this.times[key] * Math.floor(seconds / this.times[key]);
-
+                parent = true;  
             }
         }
         return time_string;

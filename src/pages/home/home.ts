@@ -11,7 +11,7 @@ import 'rxjs/add/operator/take'
 })
 export class HomePage {
   countDown;
-  counter = 30*60;
+  counter = 15*60;
   tick = 1000;
 
   constructor(public navCtrl: NavController) {
